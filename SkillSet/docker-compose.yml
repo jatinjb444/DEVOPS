@@ -5,21 +5,15 @@ services:
     image: mongo
     container_name: mongo
     ports:
-      - '27017:27017' # Optional, for accessing from host
+      - "27017:27017"
     networks:
-      custom_net:
-        aliases:
-          - mongo
+      - custom_net
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: jatinjb05/skillset:latest
     container_name: skillset-app
     ports:
-      - "4000:5001" # Assuming backend exposes 5001
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/skillset
+      - "4000:5000"
     depends_on:
       - mongo
     networks:
